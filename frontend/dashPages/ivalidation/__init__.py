@@ -1,3 +1,3 @@
 from . import model
 from . import view
-#from . import callbacks
+from . import callbacks

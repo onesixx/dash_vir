@@ -14,7 +14,7 @@ MENU_ITEMS = [
 ]
 
 Path_for_dash = '/dash'
-Port_for_dash = 8050
+Port_for_dash = 8686 
 
 BANK = [1, 2, 3]
 RACK_COLOR = ['#DFFF00', '#FFBF00', '#FF7F50', '#DE3163', '#9FE2BF', '#40E0D0',

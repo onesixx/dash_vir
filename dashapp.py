@@ -49,7 +49,8 @@ def create_dash_app(requests_pathname_prefix: str = None) -> Dash:
     # Callback
     # =============================================================================
     frontend.dashMain.callbacks.get_callbacks(app_dash)
-
+    
+    frontend.dashPages.ivalidation.callbacks.get_callbacks(app_dash)
     # frontend.dashPages.tab_cards.callbacks.get_callbacks(app_dash)
     # frontend.dashPages.basic_boxes.callbacks.get_callbacks(app_dash)
 
@@ -58,9 +59,3 @@ def create_dash_app(requests_pathname_prefix: str = None) -> Dash:
 
     return app_dash
 
-# =============================================================================
-# Run app
-# =============================================================================
-# app = create_dash_app()
-# if __name__ == '__main__':
-#     app.run_server(debug=False)

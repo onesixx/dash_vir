@@ -1,4 +1,4 @@
-from re import I
+#from re import I
 from fastapi import FastAPI
 from fastapi.middleware.wsgi import WSGIMiddleware
 from fastapi.responses import RedirectResponse
@@ -16,10 +16,8 @@ app_fastapi.mount(Path_for_dash, WSGIMiddleware(app_dash.server))
 @app_fastapi.get("/")
 def redirect_root():
     url = "http://0.0.0.0"+":"+str(Port_for_dash)+Path_for_dash+"/"
-    # print(f"sixx==>{url}")
     response = RedirectResponse(url)
     return response
-
 
 @app_fastapi.get("/status")
 def get_status():

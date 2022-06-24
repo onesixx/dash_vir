@@ -42,6 +42,8 @@ def get_callbacks(app_dash):
             raise PreventUpdate
         else:
             input_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+        print(f"sixx=input_id=> {args}")
         return activate(input_id)
 
     @app_dash.callback(

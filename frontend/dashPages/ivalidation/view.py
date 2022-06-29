@@ -5,8 +5,7 @@ import dash_admin_components as dac
 import dash_bootstrap_components as dbc
 
 from dash import dash_table
-from dash.dash_table.Format import Format, Group, Scheme
-from dash.dash_table.Format import Group
+from dash.dash_table.Format import Format, Group, Scheme, Group
 
 import pandas as pd
 from datetime import date, timedelta, datetime
@@ -62,6 +61,9 @@ dataTable_column = pd.DataFrame(
 #     df = pd.DataFrame(data)
 #     return df
 
+# =============================================================================
+# TAB1 : Raw Data 
+# =============================================================================
 r1_condi_1 = dbc.Card(
     body=True,
     #style={"height": "280px"},
@@ -137,7 +139,6 @@ r1_condi_1 = dbc.Card(
         ])
     ]
 )
-
 r1_condi_2 = dbc.Card(
     [
         dbc.Row([
@@ -154,7 +155,6 @@ r1_condi_2 = dbc.Card(
     #style={"height": "280px"},
     body=True,
 )
-
 r1_condi_3 = html.Div(
     [
         dbc.Row([
@@ -208,7 +208,7 @@ r1_condi_3 = html.Div(
     ],
 )
 
-# r2_dash_control_1 = dbc.Card(
+
 r2_dash_control_1 = dac.SimpleBox(
     title="Voltage by Rack",
     children=[
@@ -237,6 +237,8 @@ r2_dash_control_2 = dac.SimpleBox(
     ],
     width=12
 )
+
+
 r3_dash_control_3 = dac.SimpleBox(
     title="Temperature by Rack",
     children=[
@@ -255,7 +257,6 @@ r3_dash_control_3 = dac.SimpleBox(
     ],
     width=12
 )
-
 r3_dash_control_4 = dac.SimpleBox(
     title="Charge/Discharge Q by Rack",
     children=[
@@ -274,7 +275,9 @@ r3_dash_control_4 = dac.SimpleBox(
     ],
     width=12
 )
-
+# =============================================================================
+# TAB2 : Calendar
+# =============================================================================
 dash_plot_selection_dataview = dbc.Modal(
     [
         # dbc.ModalHeader(dbc.ModalTitle("Train/Test Data")),
@@ -367,9 +370,16 @@ dash_DataTable_1 = dash_table.DataTable(
     # export_headers='display',
 )
 
+# =============================================================================
+# Initial Validation 
+# =============================================================================
 content = dac.TabItem(
     id='content_ivalidation',
     children=dbc.Tabs([
+        dcc.Store(id='dash_store_data_table', data=[], storage_type='memory'),
+        # =============================================================================
+        # TAB1 : Raw Data 
+        # =============================================================================
         dbc.Tab(
             id='tab1_ivalidation', label="Raw Data",
             active_label_class_name="fw-bold",
@@ -408,7 +418,9 @@ content = dac.TabItem(
                 ),
             ]
         ),
-        # TAB2 TAB2 TAB2 TAB2 TAB2 TAB2 TAB2 TAB2 TAB2 TAB2 TAB2 TAB2 TAB2 TAB2
+        # =============================================================================
+        # TAB2 : Calendar
+        # =============================================================================
         dbc.Tab(
             label='Calendar',
             id='tab2_ivalidation',
@@ -438,17 +450,11 @@ content = dac.TabItem(
                 ),
                 html.Br(),
                 html.Div(
-                    children=[
-                        dcc.Store(
-                            id='dash_store_data_table',
-                            storage_type='memory'
-                        ),
-                        dcc.Loading(
-                            id="dash_DT_1_loading",
-                            type="default",
-                            children=[dash_DataTable_1],
-                        )
-                    ]
+                    dcc.Loading(
+                        id="dash_DT_1_loading",
+                        type="default",
+                        children=[dash_DataTable_1],
+                    )
                 )
             ]
         )

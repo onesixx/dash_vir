@@ -15,12 +15,10 @@ def activate(input_id):
         pass
     return menu_TF
 
-
 # =============================================================================
 # Callbacks
 # =============================================================================
 def get_callbacks(app_dash):
-    # -----------------------------------------------
     # -----------------------------------------------
     @app_dash.callback(
         [Output(f'content_{menu}', 'active') for menu in MENU_ITEMS],
@@ -33,6 +31,7 @@ def get_callbacks(app_dash):
             input_id = ctx.triggered[0]['prop_id'].split('.')[0]
         return activate(input_id)
 
+    # -----------------------------------------------
     @app_dash.callback(
         [Output(f'sideMenu_{menu}', 'active') for menu in MENU_ITEMS],
         [Input(f'sideMenu_{menu}', 'n_clicks') for menu in MENU_ITEMS])
@@ -46,6 +45,7 @@ def get_callbacks(app_dash):
         print(f"sixx=input_id=> {args}")
         return activate(input_id)
 
+    # -----------------------------------------------
     @app_dash.callback(
         Output('nav_bread', 'text'),
         [Input(f'sideMenu_{menu}', 'n_clicks') for menu in MENU_ITEMS])

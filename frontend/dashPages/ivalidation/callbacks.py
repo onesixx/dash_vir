@@ -47,8 +47,6 @@ def dash_q_data(sBankNo):
     return data
 
 
-
-
 def dash_box_data(sCysDate, sBankNo):
     data = df_dash_data_box(sCysDate.replace('-', ''), sBankNo)
     return data
@@ -161,21 +159,20 @@ def dash_box_data(sCysDate, sBankNo):
 
 
 def get_callbacks(app_dash):
-    @app_dash.callback(Output('dash_store_data_table', 'data'),
-                Input('dash_btn_load_check_data', 'n_clicks'),
-                State('dash_tab2_date_range', 'start_date'),
-                State('dash_tab2_date_range', 'end_date'))
+
+    @app_dash.callback(
+        Output('dash_store_data_table', 'data'),
+        Input('dash_btn_load_check_data', 'n_clicks'),
+        State('dash_tab2_date_range', 'start_date'),
+        State('dash_tab2_date_range', 'end_date'))
     def df_data_status_load(n_clicks, start_date, end_date):
-        
-        if n_clicks is None:
+        # start_date = '2020-01-05'
+        # end_date = '2020-06-09'
+        if n_clicks is None or start_date is None or end_date is None:
             raise PreventUpdate
         else:
-            if start_date is None:
-                raise PreventUpdate
-            if end_date is None:
-                raise PreventUpdate
-            data = df_data_status('1', start_date, end_date)
-            print("-----------------Callback-----------------------")
+            data = df_data_status(sStartDate=start_date, sEndDate=end_date, sBankNo=1)
+            print(data)
             return data.to_json(date_format='iso', orient='split')
 
 

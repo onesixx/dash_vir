@@ -62,7 +62,7 @@ dataTable_column = pd.DataFrame(
 #     return df
 
 # =============================================================================
-# TAB1 : Raw Data 
+# TAB1 : Raw Data
 # =============================================================================
 r1_condi_1 = dbc.Card(
     body=True,
@@ -371,14 +371,14 @@ dash_DataTable_1 = dash_table.DataTable(
 )
 
 # =============================================================================
-# Initial Validation 
+# Initial Validation
 # =============================================================================
 content = dac.TabItem(
     id='content_ivalidation',
     children=dbc.Tabs([
-        dcc.Store(id='dash_store_data_table', data=[], storage_type='memory'),
+        
         # =============================================================================
-        # TAB1 : Raw Data 
+        # TAB1 : Raw Data
         # =============================================================================
         dbc.Tab(
             id='tab1_ivalidation', label="Raw Data",
@@ -386,6 +386,7 @@ content = dac.TabItem(
             tab_class_name="text-center",  # flex-grow-1
             # children=html.Div(
             children=[
+                dcc.Store(id='dash_store_data_table', data=[], storage_type='memory'),
                 dcc.Store(id='ds_dash_df',         storage_type='memory'),
                 dcc.Store(id='ds_dash_compare_df', storage_type='memory'),
                 dcc.Store(id='ds_dash_box_data',   storage_type='memory'),
@@ -422,8 +423,7 @@ content = dac.TabItem(
         # TAB2 : Calendar
         # =============================================================================
         dbc.Tab(
-            label='Calendar',
-            id='tab2_ivalidation',
+            id='tab2_ivalidation', label='Calendar',
             active_label_class_name="fw-bold",
             tab_class_name="text-center",  # flex-grow-1
             children=[
@@ -443,8 +443,7 @@ content = dac.TabItem(
                         dbc.Button(
                             "Load",
                             id="dash_btn_load_check_data", className="me-2 fas fa-arrow-alt-circle-right",
-                            color="dark",
-                            style={"margin-left": "15px"}
+                            color="dark", style={"margin-left": "15px"}
                         ),
                     ]
                 ),

@@ -1,9 +1,10 @@
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 
+import pandas as pd
 
 from frontend.common.dconfig import base_dir
-base_dir = '/Users/onesixx/my/git/dash_vir/'
+# base_dir = '/Users/onesixx/my/git/dash_vir'
 import pandas as pd
 
 
@@ -31,20 +32,23 @@ def df_dash_polar_data():
 
 
 
-def df_data_status(sBankNo, sStartDate, sEndDate):
-    data = pd.read_csv(base_dir+'./data/data_status.csv')
+def df_data_status(sStartDate, sEndDate, sBankNo):
+    # sStartDate = '2022-01-01'
+    # sEndDate = '2022-01-10'
+    # sBankNo=1
+    data = pd.read_csv(base_dir+'/data/data_status.csv')
     print("-----------------MODEL--------------------")
     data["cyc_date"] = data["cyc_date"].apply(str)
 
     data = data[(data["bank_no"] == int(sBankNo)) &
                 (data["cyc_date"] >= sStartDate.replace('-', '')) &
                 (data["cyc_date"] <= sEndDate.replace('-', ''))]
-
     data = data.sort_values(by=['bank_no', 'cyc_date'], ascending=False)
+    # rename columns 
     data.columns = ['a', 'Date', 'Bank', 'Voltage', 'Current', 'ChargeQ', 'SunShine',
                     'DataCount', 'DataFail', 'UseYN', 'UseDesc', 'DTime', 'WeekDay', 'sid']
-
-    return data[['Date', 'WeekDay', 'Bank', 'Voltage', 'Current', 'ChargeQ', 'DataCount', 'DataFail', 'UseYN', 'UseDesc']]
+    selected_col = ['Date', 'WeekDay', 'Bank', 'Voltage', 'Current', 'ChargeQ', 'DataCount', 'DataFail', 'UseYN', 'UseDesc']
+    return data[selected_col]
 
 
 
